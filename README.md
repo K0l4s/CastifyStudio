@@ -1,16 +1,26 @@
 # castify_studio
 
-A new Flutter project.
+## Project Structure
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+lib/
+├── core/                   # Các giá trị chung toàn app
+│   ├── constants/          # Color, spacing, strings
+│   ├── themes/             # App theme
+│   ├── error/              # AppException, error mapper
+│   └── routes/             # GoRouter setup
+├── features/               # Chia theo từng tính năng
+│   ├── auth/               # Tính năng đăng nhập, đăng ký
+│   │   ├── data/           # Repository, data source (Firebase)
+│   │   ├── domain/         # UseCases, Entities
+│   │   └── presentation/   # UI + state (Provider/BLoC)
+│   ├── profile/
+│   ├── podcast/            # Upload, play, like, comment
+│   └── dashboard/          # Trang chủ, trending, following
+├── common/                 # Reusable widgets
+│   ├── widgets/            # Button, Card, Avatar...
+│   ├── styles/             # Padding, text style, spacing
+│   └── dialogs/            # AlertDialog, LoadingDialog...
+├── services/               # Firebase, Notification, Audio
+├── config/                 # firebase_options.dart, env, app config
+├── utils/                  # Formatter, Validators, Extension
+└── main.dart
