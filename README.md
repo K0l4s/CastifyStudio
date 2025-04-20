@@ -2,6 +2,7 @@
 
 ## Project Structure
 
+```text
 lib/
 ├── core/                   # Các giá trị chung toàn app
 │   ├── constants/          # Color, spacing, strings
