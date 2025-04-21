@@ -32,7 +32,7 @@ class _SplashScreenState extends State<SplashScreen> {
         _goToHome();
       } else {
         await SharedPrefs.clearTokens();
-        _goToLogin;
+        _goToLogin();
       }
     } else {
       _goToLogin();
