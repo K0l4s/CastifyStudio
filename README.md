@@ -4,6 +4,8 @@
 
 ```text
 lib/
+├── assets/
+│   └── images/             # Chứa hình ảnh dùng trong ứng dụng
 ├── core/                   # Các giá trị chung toàn app
 │   ├── constants/          # Color, spacing, strings
 │   ├── themes/             # App theme
