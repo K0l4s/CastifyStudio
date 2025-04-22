@@ -1,46 +1,77 @@
-import 'package:castify_studio/features/auth/domain/entities/role.dart';
 import 'package:castify_studio/features/auth/domain/entities/user.dart';
 
 class UserModel extends User {
   UserModel({
     required super.id,
-    required super.firstName,
-    required super.middleName,
-    required super.lastName,
+    required super.fullname,
+    required super.username,
     required super.avatarUrl,
     required super.coverUrl,
-    required super.email,
     required super.birthday,
     required super.address,
+    required super.location,
+    required super.locality,
     required super.phone,
-    required super.code,
-    required super.createDay,
-    required super.isActive,
-    required super.isLock,
-    required super.username,
-    required super.role,
-    required super.enabled,
+    required super.email,
+    required super.totalFollower,
+    required super.totalFollowing,
+    required super.totalPost,
+    required super.follow,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
       id: json['id'],
-      firstName: json['firstName'],
-      middleName: json['middleName'],
-      lastName: json['lastName'],
+      fullname: json['fullname'],
+      username: json['username'],
       avatarUrl: json['avatarUrl'],
       coverUrl: json['coverUrl'],
-      email: json['email'],
-      birthday: json['birthday'],
+      birthday: DateTime(
+        json['birthday'][0],
+        json['birthday'][1],
+        json['birthday'][2],
+        json['birthday'][3],
+        json['birthday'][4],
+        json['birthday'][5],
+        json['birthday'][6] ~/ 1000000, // convert nanoseconds to milliseconds
+      ),
       address: json['address'],
+      location: json['location'],
+      locality: json['locality'],
       phone: json['phone'],
-      code: json['code'],
-      createDay: DateTime.parse(json['createDay']),
-      isActive: json['isActive'],
-      isLock: json['isLock'],
-      username: json['username'],
-      role: Role.values.firstWhere((e) => e.toString().split('.').last == json['role']),
-      enabled: json['enabled'],
+      email: json['email'],
+      totalFollower: json['totalFollower'],
+      totalFollowing: json['totalFollowing'],
+      totalPost: json['totalPost'],
+      follow: json['follow'],
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'fullname': fullname,
+      'username': username,
+      'avatarUrl': avatarUrl,
+      'coverUrl': coverUrl,
+      'birthday': [
+        birthday.year,
+        birthday.month,
+        birthday.day,
+        birthday.hour,
+        birthday.minute,
+        birthday.second,
+        birthday.microsecond * 1000,
+      ],
+      'address': address,
+      'location': location,
+      'locality': locality,
+      'phone': phone,
+      'email': email,
+      'totalFollower': totalFollower,
+      'totalFollowing': totalFollowing,
+      'totalPost': totalPost,
+      'follow': follow,
+    };
   }
 }
