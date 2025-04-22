@@ -41,5 +41,7 @@ class SharedPrefs {
   static Future<void> clearUser() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove('user_info');
+    await prefs.remove('access_token');
+    await prefs.remove('refresh_token');
   }
 }
