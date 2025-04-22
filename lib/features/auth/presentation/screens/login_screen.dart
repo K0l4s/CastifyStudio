@@ -4,7 +4,7 @@ import 'package:castify_studio/features/auth/presentation/components/my_text_fie
 import 'package:castify_studio/features/auth/presentation/provider/auth_provider.dart';
 import 'package:castify_studio/features/auth/presentation/screens/forgot_screen.dart';
 import 'package:castify_studio/features/auth/presentation/screens/privacy_screen.dart';
-import 'package:castify_studio/features/home/presentation/home_screen.dart';
+import 'package:castify_studio/features/main/presentation/main_screen.dart';
 import 'package:castify_studio/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -44,7 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
     if (success && mounted) {
       Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (context) => const HomeScreen()),
+        MaterialPageRoute(builder: (context) => const MainScreen()),
             (Route<dynamic> route) => false, // xoá hết mọi route trước đó
       );
     } else {
