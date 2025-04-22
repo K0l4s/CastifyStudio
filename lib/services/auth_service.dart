@@ -15,7 +15,6 @@ class AuthService {
 
     if (accessToken != null && refreshToken != null) {
       await SharedPrefs.saveToken(accessToken, refreshToken);
-      _api.setToken(accessToken);
       return true;
     }
     return false;
@@ -38,7 +37,6 @@ class AuthService {
       final newRefresh = res['refresh_token'];
       if (newAccess != null) {
         await SharedPrefs.saveToken(newAccess, newRefresh);
-        _api.setToken(newAccess);
         return true;
       }
     } catch (_) {}

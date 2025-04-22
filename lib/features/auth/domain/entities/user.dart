@@ -1,41 +1,35 @@
-import 'package:castify_studio/features/auth/domain/entities/role.dart';
-
 class User {
   final String id;
-  final String firstName;
-  final String middleName;
-  final String lastName;
+  final String fullname;
+  final String username;
   final String avatarUrl;
   final String coverUrl;
-  final String email;
-  final String birthday;
+  final DateTime birthday;
   final String address;
+  final dynamic location; // có thể define model riêng nếu cần
+  final String locality;
   final String phone;
-  final String code;
-  final DateTime createDay;
-  final bool isActive;
-  final bool isLock;
-  final String username;
-  final Role role;
-  final bool enabled;
+  final String email;
+  final int totalFollower;
+  final int totalFollowing;
+  final int totalPost;
+  final bool follow;
 
   User({
     required this.id,
-    required this.firstName,
-    required this.middleName,
-    required this.lastName,
+    required this.fullname,
+    required this.username,
     required this.avatarUrl,
     required this.coverUrl,
-    required this.email,
     required this.birthday,
     required this.address,
+    required this.location,
+    required this.locality,
     required this.phone,
-    required this.code,
-    required this.createDay,
-    required this.isActive,
-    required this.isLock,
-    required this.username,
-    required this.role,
-    required this.enabled,
+    required this.email,
+    required this.totalFollower,
+    required this.totalFollowing,
+    required this.totalPost,
+    required this.follow,
   });
 }

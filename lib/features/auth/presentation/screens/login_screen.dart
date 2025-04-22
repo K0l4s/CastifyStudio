@@ -2,10 +2,13 @@ import 'package:castify_studio/common/dialogs/error_dialog.dart';
 import 'package:castify_studio/features/auth/presentation/components/my_button.dart';
 import 'package:castify_studio/features/auth/presentation/components/my_text_field.dart';
 import 'package:castify_studio/features/auth/presentation/provider/auth_provider.dart';
+import 'package:castify_studio/features/auth/presentation/provider/user_provider.dart';
 import 'package:castify_studio/features/auth/presentation/screens/forgot_screen.dart';
 import 'package:castify_studio/features/auth/presentation/screens/privacy_screen.dart';
 import 'package:castify_studio/features/main/presentation/main_screen.dart';
 import 'package:castify_studio/services/auth_service.dart';
+import 'package:castify_studio/services/user_service.dart';
+import 'package:castify_studio/utils/shared_prefs.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -43,6 +46,14 @@ class _LoginScreenState extends State<LoginScreen> {
     );
 
     if (success && mounted) {
+      final userInfo = await UserService().getSelfUserInfo();
+      if (userInfo != null) {
+        await SharedPrefs.saveUser(userInfo);
+
+        final userProvider = Provider.of<UserProvider>(context, listen: false);
+        userProvider.updateUser(userInfo);
+      }
+
       Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (context) => const MainScreen()),
             (Route<dynamic> route) => false, // xoá hết mọi route trước đó

@@ -61,8 +61,10 @@ class _MainScreenState extends State<MainScreen> {
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.blue.shade700,
         unselectedItemColor: Colors.grey.shade700,
+        selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
         onTap: _onItemTapped,
         type: BottomNavigationBarType.fixed,
+        backgroundColor: Colors.grey.shade100,
       ),
     );
   }

@@ -1,32 +1,35 @@
 import 'dart:convert';
+import 'package:castify_studio/utils/shared_prefs.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
+import 'package:logger/web.dart';
 
 class ApiService {
   final String _baseUrl = dotenv.env['API_BASE_URL']!;
-  String? _token;
+  final logger = Logger();
 
-  void setToken(String token) {
-    _token = token;
+  Future<String?> _getToken() async {
+    return await SharedPrefs.getAccessToken();
   }
 
-  void clearToken() {
-    _token = null;
-  }
-
-  Map<String, String> _headers({Map<String, String>? extra}) {
+  Future<Map<String, String>> _headers({Map<String, String>? extra}) async {
     final headers = {
       'Content-Type': 'application/json',
-      if (_token != null) 'Authorization': 'Bearer $_token',
-      ...?extra,
+      if (extra != null) ...extra,
     };
+
+    final token = await _getToken();
+    if (token != null) {
+      headers['Authorization'] = 'Bearer $token';
+    }
+
     return headers;
   }
 
   Future<dynamic> get(String path, {Map<String, String>? headers}) async {
     final uri = Uri.parse('$_baseUrl$path');
-    final response = await http.get(uri, headers: _headers(extra: headers));
+    final response = await http.get(uri, headers: await _headers(extra: headers));
     return _processResponse(response);
   }
 
@@ -35,7 +38,7 @@ class ApiService {
     final uri = Uri.parse('$_baseUrl$path');
     final response = await http.post(
       uri,
-      headers: _headers(extra: headers),
+      headers: await _headers(extra: headers),
       body: jsonEncode(body),
     );
     return _processResponse(response);
@@ -46,7 +49,7 @@ class ApiService {
     final uri = Uri.parse('$_baseUrl$path');
     final response = await http.put(
       uri,
-      headers: _headers(extra: headers),
+      headers: await _headers(extra: headers),
       body: jsonEncode(body),
     );
     return _processResponse(response);
@@ -54,7 +57,7 @@ class ApiService {
 
   Future<dynamic> delete(String path, {Map<String, String>? headers}) async {
     final uri = Uri.parse('$_baseUrl$path');
-    final response = await http.delete(uri, headers: _headers(extra: headers));
+    final response = await http.delete(uri, headers: await _headers(extra: headers));
     return _processResponse(response);
   }
 
