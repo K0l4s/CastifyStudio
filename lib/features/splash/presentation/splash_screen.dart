@@ -1,5 +1,5 @@
 import 'package:castify_studio/features/auth/presentation/screens/login_screen.dart';
-import 'package:castify_studio/features/home/presentation/home_screen.dart';
+import 'package:castify_studio/features/main/presentation/main_screen.dart';
 import 'package:castify_studio/services/api_service.dart';
 import 'package:castify_studio/services/auth_service.dart';
 import 'package:castify_studio/utils/shared_prefs.dart';
@@ -46,7 +46,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void _goToHome() {
     Navigator.of(context).pushAndRemoveUntil(
-      MaterialPageRoute(builder: (context) => const HomeScreen()),
+      MaterialPageRoute(builder: (context) => const MainScreen()),
           (Route<dynamic> route) => false,
     );
   }
