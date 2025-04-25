@@ -18,6 +18,12 @@ class UserProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<UserModel> loadUserModel() async {
+    _user = await SharedPrefs.getUser();
+    notifyListeners();
+    return _user!;
+  }
+
   // Cập nhật toàn bộ user và lưu vào SharedPreferences
   Future<void> updateUser(UserModel user) async {
     _user = user;

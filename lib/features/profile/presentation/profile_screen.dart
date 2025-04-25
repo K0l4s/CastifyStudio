@@ -112,9 +112,10 @@ class ProfileScreen extends StatelessWidget {
                         ToastService.showToast('Successfully signed out');
 
                         // Quay về màn hình login
-                        Navigator.pushReplacement(
+                        Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(builder: (_) => const LoginScreen()),
+                          (Route<dynamic> route) => false
                         );
                       },
                     );
