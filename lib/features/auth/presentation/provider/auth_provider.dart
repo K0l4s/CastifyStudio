@@ -29,4 +29,29 @@ class AuthProvider with ChangeNotifier {
       return false;
     }
   }
+
+  Future<bool> register(String email, String repeatEmail, String password, String confirmPassword,
+      String username, String firstName, String middleName, String lastName) async {
+    _loading = true;
+    _errorMessage = "";
+    notifyListeners();
+
+    try {
+      final res = await authService.register(email, repeatEmail, password, confirmPassword,
+          username, firstName, middleName, lastName);
+
+      _loading = false;
+      notifyListeners();
+
+      if (res) {
+        return true;
+      }
+      return false;
+    } catch (e) {
+      _loading = false;
+      _errorMessage = "$e";
+      notifyListeners();
+      return false;
+    }
+  }
 }

@@ -5,6 +5,7 @@ import 'package:castify_studio/features/auth/presentation/provider/auth_provider
 import 'package:castify_studio/features/auth/presentation/provider/user_provider.dart';
 import 'package:castify_studio/features/auth/presentation/screens/forgot_screen.dart';
 import 'package:castify_studio/features/auth/presentation/screens/privacy_screen.dart';
+import 'package:castify_studio/features/auth/presentation/screens/register_screen.dart';
 import 'package:castify_studio/features/main/presentation/main_screen.dart';
 import 'package:castify_studio/services/auth_service.dart';
 import 'package:castify_studio/services/toast_service.dart';
@@ -135,7 +136,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         onTap: isLoading ? null : () => _handleLogin(context),
                         text: isLoading ? "Logging in..." : "Login",
                       ),
-                      const SizedBox(height: 60),
+                      const SizedBox(height: 40),
 
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -155,6 +156,31 @@ class _LoginScreenState extends State<LoginScreen> {
                               " Click here",
                               style: TextStyle(
                                 color: Theme.of(context).colorScheme.inversePrimary,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 20),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Not a member ?",
+                            style: TextStyle(color: Theme.of(context).colorScheme.primary),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (_) => const RegisterScreen()),
+                              );
+                            },
+                            child: Text(
+                              " Register",
+                              style: TextStyle(
+                                color: Colors.blue.shade900,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
