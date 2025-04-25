@@ -2,6 +2,7 @@ import 'package:castify_studio/common/dialogs/confirm_dialog.dart';
 import 'package:castify_studio/features/auth/presentation/provider/user_provider.dart';
 import 'package:castify_studio/features/auth/presentation/screens/login_screen.dart';
 import 'package:castify_studio/features/auth/presentation/screens/privacy_screen.dart';
+import 'package:castify_studio/features/profile/presentation/edit_profile_screen.dart';
 import 'package:castify_studio/services/toast_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -66,7 +67,10 @@ class ProfileScreen extends StatelessWidget {
                 Center(
                   child: ElevatedButton(
                     onPressed: () {
-                      // Chuyển đến màn hình chỉnh sửa profile
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => const EditProfileScreen()),
+                      );
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue.shade900, // Nền của nút

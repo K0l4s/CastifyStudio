@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:castify_studio/utils/shared_prefs.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
@@ -59,6 +60,50 @@ class ApiService {
     final uri = Uri.parse('$_baseUrl$path');
     final response = await http.delete(uri, headers: await _headers(extra: headers));
     return _processResponse(response);
+  }
+
+  Future<dynamic> postMultipart(String path, FormData formData) async {
+    final token = await _getToken();
+    final dio = Dio(BaseOptions(
+      baseUrl: _baseUrl,
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'multipart/form-data',
+      },
+    ));
+
+    try {
+      final response = await dio.post(path, data: formData);
+      return response.data;
+    } on DioException catch (e) {
+      logger.e('Error: ${e.message}');
+      throw ApiException(
+        statusCode: e.response?.statusCode ?? 500,
+        message: e.response?.data['message'] ?? 'Failed',
+      );
+    }
+  }
+
+  Future<dynamic> putMultipart(String path, FormData formData) async {
+    final token = await _getToken();
+    final dio = Dio(BaseOptions(
+      baseUrl: _baseUrl,
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'multipart/form-data',
+      },
+    ));
+
+    try {
+      final response = await dio.put(path, data: formData);
+      return response.data;
+    } on DioException catch (e) {
+      logger.e('Error: ${e.message}');
+      throw ApiException(
+        statusCode: e.response?.statusCode ?? 500,
+        message: e.response?.data['message'] ?? 'Failed',
+      );
+    }
   }
 
   dynamic _processResponse(http.Response response) {
