@@ -2,39 +2,46 @@ import 'package:castify_studio/features/auth/domain/entities/user.dart';
 
 class UserModel extends User {
   UserModel({
-    required super.id,
-    required super.fullname,
-    required super.username,
-    required super.avatarUrl,
-    required super.coverUrl,
-    required super.birthday,
-    required super.address,
-    required super.location,
-    required super.locality,
-    required super.phone,
-    required super.email,
-    required super.totalFollower,
-    required super.totalFollowing,
-    required super.totalPost,
-    required super.follow,
+    super.id,
+    super.fullname,
+    super.username,
+    super.avatarUrl,
+    super.coverUrl,
+    super.birthday,
+    super.address,
+    super.location,
+    super.locality,
+    super.phone,
+    super.email,
+    super.totalFollower,
+    super.totalFollowing,
+    super.totalPost,
+    super.follow,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
+    final birthdayJson = json['birthday'];
+    DateTime? parsedBirthday;
+
+    if (birthdayJson != null && birthdayJson is List && birthdayJson.length == 7) {
+      parsedBirthday = DateTime(
+        birthdayJson[0],
+        birthdayJson[1],
+        birthdayJson[2],
+        birthdayJson[3],
+        birthdayJson[4],
+        birthdayJson[5],
+        birthdayJson[6] ~/ 1000000, // nanoseconds to milliseconds
+      );
+    }
+
     return UserModel(
       id: json['id'],
       fullname: json['fullname'],
       username: json['username'],
       avatarUrl: json['avatarUrl'],
       coverUrl: json['coverUrl'],
-      birthday: DateTime(
-        json['birthday'][0],
-        json['birthday'][1],
-        json['birthday'][2],
-        json['birthday'][3],
-        json['birthday'][4],
-        json['birthday'][5],
-        json['birthday'][6] ~/ 1000000, // convert nanoseconds to milliseconds
-      ),
+      birthday: parsedBirthday,
       address: json['address'],
       location: json['location'],
       locality: json['locality'],
@@ -54,15 +61,17 @@ class UserModel extends User {
       'username': username,
       'avatarUrl': avatarUrl,
       'coverUrl': coverUrl,
-      'birthday': [
-        birthday.year,
-        birthday.month,
-        birthday.day,
-        birthday.hour,
-        birthday.minute,
-        birthday.second,
-        birthday.microsecond * 1000,
-      ],
+      'birthday': birthday != null
+          ? [
+        birthday!.year,
+        birthday!.month,
+        birthday!.day,
+        birthday!.hour,
+        birthday!.minute,
+        birthday!.second,
+        birthday!.microsecond * 1000,
+      ]
+          : null,
       'address': address,
       'location': location,
       'locality': locality,

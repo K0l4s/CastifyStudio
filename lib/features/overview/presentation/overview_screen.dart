@@ -102,7 +102,9 @@ class _OverviewScreenState extends State<OverviewScreen> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           CircleAvatar(
-            backgroundImage: NetworkImage(_user!.avatarUrl ?? ''),
+            backgroundImage: _user?.avatarUrl != null
+                ? NetworkImage(_user!.avatarUrl!)
+                : const AssetImage('lib/assets/images/default_avatar.jpg') as ImageProvider,
             radius: 40,
           ),
           const SizedBox(width: 16),
@@ -121,7 +123,7 @@ class _OverviewScreenState extends State<OverviewScreen> {
               ),
               const SizedBox(height: 4),
               Text(
-                  '${FormatUtils.formatNumber(_user!.totalFollower)} Followers',
+                  '${FormatUtils.formatNumber(_user!.totalFollower ?? 0 )} Followers',
                   style: const TextStyle(color: Colors.black)
               ),
             ],
