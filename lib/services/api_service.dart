@@ -28,8 +28,12 @@ class ApiService {
     return headers;
   }
 
-  Future<dynamic> get(String path, {Map<String, String>? headers}) async {
-    final uri = Uri.parse('$_baseUrl$path');
+  Future<dynamic> get(
+    String path, {
+      Map<String, String>? headers,
+      Map<String, String>? queryParams
+    }) async {
+    final uri = Uri.parse('$_baseUrl$path').replace(queryParameters: queryParams);
     final response = await http.get(uri, headers: await _headers(extra: headers));
     return _processResponse(response);
   }
