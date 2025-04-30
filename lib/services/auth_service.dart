@@ -55,7 +55,6 @@ class AuthService {
       await SharedPrefs.saveToken(newAccess, newRefresh);
       return true;
     }
-
     return false;
   }
   
