@@ -1,5 +1,5 @@
 import 'package:castify_studio/features/chat/presentation/chat_screen.dart';
-import 'package:castify_studio/features/content/presentation/content_screen.dart';
+import 'package:castify_studio/features/content/presentation/screens/content_screen.dart';
 import 'package:castify_studio/features/notification/presentation/notification_screen.dart';
 import 'package:castify_studio/features/overview/presentation/overview_screen.dart';
 import 'package:castify_studio/features/upload/presentation/upload_screen.dart';
