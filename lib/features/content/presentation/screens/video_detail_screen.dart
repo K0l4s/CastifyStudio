@@ -1,9 +1,11 @@
 import 'package:castify_studio/common/widgets/common_info_bottom_sheet.dart';
 import 'package:castify_studio/features/content/data/models/podcast_model.dart';
+import 'package:castify_studio/features/content/presentation/provider/podcast_provider.dart';
 import 'package:castify_studio/features/content/presentation/screens/edit_video_screen.dart';
 import 'package:castify_studio/features/content/presentation/widgets/genre_list.dart';
 import 'package:flutter/material.dart';
 import 'package:castify_studio/utils/format_utils.dart';
+import 'package:provider/provider.dart';
 
 class VideoDetailScreen extends StatelessWidget {
   final Podcast podcast;
@@ -12,6 +14,12 @@ class VideoDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final podcast = context.watch<PodcastProvider>().podcasts.firstWhere(
+          (p) => p.id == this.podcast.id,
+      orElse: () => this.podcast,
+    );
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Details"),

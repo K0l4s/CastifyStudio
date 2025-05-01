@@ -93,4 +93,32 @@ class PodcastProvider with ChangeNotifier {
       sortByCreatedDay: sortBy == 'createdDay' ? order : 'desc',
     );
   }
+
+  void updatePodcast(Podcast updatedPodcast) {
+    final index = _podcasts.indexWhere((podcast) => podcast.id == updatedPodcast.id);
+    if (index != -1) {
+      _podcasts[index] = updatedPodcast;
+      notifyListeners();
+    }
+  }
+
+  Future<void> togglePodcastVisibility(String podcastId) async {
+    try {
+      await _podcastService.togglePodcast([podcastId]);
+
+      // Update the podcast's visibility locally
+      final podcastIndex = _podcasts.indexWhere((podcast) => podcast.id == podcastId);
+      if (podcastIndex != -1) {
+        _podcasts[podcastIndex] = _podcasts[podcastIndex].copyWith(
+          active: !_podcasts[podcastIndex].active,  // Toggle active status
+        );
+        notifyListeners();
+      }
+
+      debugPrint("Podcast visibility updated");
+    } catch (e) {
+      debugPrint('Toggle failed: $e');
+      rethrow;
+    }
+  }
 }

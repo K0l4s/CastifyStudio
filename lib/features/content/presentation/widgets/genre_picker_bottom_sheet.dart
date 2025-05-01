@@ -124,6 +124,7 @@ class _GenrePickerBottomSheetState extends State<GenrePickerBottomSheet> {
                       title: Text(genre.name),
                       value: selectedIds.contains(genre.id),
                       onChanged: (_) => _toggleGenre(genre.id),
+                      activeColor: Colors.blue.shade800,
                       controlAffinity:
                       ListTileControlAffinity.leading,
                     );
@@ -132,9 +133,18 @@ class _GenrePickerBottomSheetState extends State<GenrePickerBottomSheet> {
               ),
               SizedBox(
                 width: double.infinity,
-                child: ElevatedButton(
+                child: OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: Colors.blue.shade800,
+                    side: BorderSide(color: Colors.blue.shade800),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
                   onPressed: () {
-                    final selectedGenres = _allGenres.where((g) => selectedIds.contains(g.id)).toList();
+                    final selectedGenres = _allGenres
+                        .where((g) => selectedIds.contains(g.id))
+                        .toList();
                     Navigator.pop(context, selectedGenres);
                   },
                   child: const Text("Confirm"),
