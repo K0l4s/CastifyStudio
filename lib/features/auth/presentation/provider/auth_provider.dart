@@ -54,4 +54,43 @@ class AuthProvider with ChangeNotifier {
       return false;
     }
   }
+
+  // Forgot password
+  Future<bool> forgotPassword(String email) async {
+    _loading = true;
+    _errorMessage = "";
+    notifyListeners();
+
+    try {
+      final result = await authService.sendResetRequest(email);
+      _loading = false;
+      notifyListeners();
+      return result;
+    } catch (e) {
+      _loading = false;
+      // _errorMessage = "Failed to send reset password request";
+      _errorMessage = e.toString();
+      notifyListeners();
+      return false;
+    }
+  }
+
+  // Reset password
+  Future<bool> resetPassword(String newPassword) async {
+    _loading = true;
+    _errorMessage = "";
+    notifyListeners();
+
+    try {
+      final result = await authService.resetPassword(newPassword);
+      _loading = false;
+      notifyListeners();
+      return result;
+    } catch (e) {
+      _loading = false;
+      _errorMessage = "Failed to reset password";
+      notifyListeners();
+      return false;
+    }
+  }
 }
