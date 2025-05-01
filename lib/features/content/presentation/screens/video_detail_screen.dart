@@ -1,5 +1,6 @@
 import 'package:castify_studio/common/widgets/common_info_bottom_sheet.dart';
 import 'package:castify_studio/features/content/data/models/podcast_model.dart';
+import 'package:castify_studio/features/content/presentation/screens/edit_video_screen.dart';
 import 'package:castify_studio/features/content/presentation/widgets/genre_list.dart';
 import 'package:flutter/material.dart';
 import 'package:castify_studio/utils/format_utils.dart';
@@ -19,7 +20,14 @@ class VideoDetailScreen extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.edit),
             onPressed: () {
-              // TODO: Navigate to edit screen
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => EditVideoScreen(
+                    podcast: podcast,
+                  ),
+                ),
+              );
             },
           ),
           IconButton(
