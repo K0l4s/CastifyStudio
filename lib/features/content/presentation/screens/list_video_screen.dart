@@ -168,6 +168,8 @@ class _ListVideoScreenState extends State<ListVideoScreen> {
                               children: [
                                 Text(
                                   podcast.title,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
                                   style: const TextStyle(fontWeight: FontWeight.bold),
                                 ),
                                 const SizedBox(height: 4),
