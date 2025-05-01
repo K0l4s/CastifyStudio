@@ -1,4 +1,5 @@
 import 'package:castify_studio/features/content/presentation/provider/podcast_provider.dart';
+import 'package:castify_studio/features/content/presentation/screens/video_detail_screen.dart';
 import 'package:castify_studio/utils/format_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -13,26 +14,26 @@ class ListVideoScreen extends StatefulWidget {
 class _ListVideoScreenState extends State<ListVideoScreen> {
   // Các tùy chọn bộ lọc
   final List<String> _filterOptions = [
-    'Mặc định',
-    'Lượt xem tăng dần', // BUG
-    'Lượt xem giảm dần',
-    'Lượt bình luận tăng dần', // BUG
-    'Lượt bình luận giảm dần',
-    'Ngày phát hành tăng dần',
-    'Ngày phát hành giảm dần',
+    'Default',
+    'Views ascending', // BUG
+    'Views descending',
+    'Comments ascending', // BUG
+    'Comments descending',
+    'Release date ascending',
+    'Release date descending',
   ];
   // Map từ nhãn tới sortBy và order
   final Map<String, Map<String, String>> _filterMap = {
-    'Mặc định':         {'sortBy': 'createdDay', 'order': 'desc'},
-    'Lượt xem tăng dần':    {'sortBy': 'views',      'order': 'asc'},
-    'Lượt xem giảm dần':    {'sortBy': 'views',      'order': 'desc'},
-    'Lượt bình luận tăng dần': {'sortBy': 'comments',   'order': 'asc'},
-    'Lượt bình luận giảm dần': {'sortBy': 'comments',   'order': 'desc'},
-    'Ngày phát hành tăng dần':    {'sortBy': 'createdDay','order': 'asc'},
-    'Ngày phát hành giảm dần':    {'sortBy': 'createdDay','order': 'desc'},
+    'Default': {'sortBy': 'createdDay', 'order': 'desc'},
+    'Views ascending': {'sortBy': 'views', 'order': 'asc'},
+    'Views descending': {'sortBy': 'views', 'order': 'desc'},
+    'Comments ascending': {'sortBy': 'comments', 'order': 'asc'},
+    'Comments descending': {'sortBy': 'comments', 'order': 'desc'},
+    'Release date ascending': {'sortBy': 'createdDay', 'order': 'asc'},
+    'Release date descending': {'sortBy': 'createdDay', 'order': 'desc'},
   };
 
-  String _selectedFilter = 'Mặc định';
+  String _selectedFilter = 'Default';
   String _sortBy = 'createdDay';
   String _order = 'desc';
   final ScrollController _scrollController = ScrollController();
@@ -40,7 +41,9 @@ class _ListVideoScreenState extends State<ListVideoScreen> {
   @override
   void initState() {
     super.initState();
-    _applyFilterAndFetch();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _applyFilterAndFetch(); // chạy sau build
+    });
     _scrollController.addListener(_onScroll);
   }
 
@@ -78,7 +81,8 @@ class _ListVideoScreenState extends State<ListVideoScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Tất cả video'),
+        title: const Text('All video'),
+        backgroundColor: Colors.grey.shade100,
       ),
       body: Column(
         children: [
@@ -95,7 +99,7 @@ class _ListVideoScreenState extends State<ListVideoScreen> {
                   const Icon(Icons.filter_list, size: 20, color: Colors.black54),
                   const SizedBox(width: 8),
                   const Text(
-                    'Sắp xếp theo:',
+                    'Sort by:',
                     style: TextStyle(fontWeight: FontWeight.w500),
                   ),
                   const SizedBox(width: 16),
@@ -137,56 +141,66 @@ class _ListVideoScreenState extends State<ListVideoScreen> {
                 final podcast = provider.podcasts[index];
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                  child: Container(
-                    color: Colors.white,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Image.network(
-                          podcast.thumbnailUrl,
-                          width: 150,
-                          height: 100,
-                          fit: BoxFit.cover,
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => VideoDetailScreen(podcast: podcast),
                         ),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                podcast.title,
-                                style: const TextStyle(fontWeight: FontWeight.bold),
-                              ),
-                              const SizedBox(height: 4),
-                              Row(
-                                children: [
-                                  Icon(Icons.visibility, size: 16, color: Colors.grey.shade700,),
-                                  const SizedBox(width: 4),
-                                  Text(FormatUtils.formatNumber(podcast.views)),
-                                  const SizedBox(width: 12),
-                                  Icon(Icons.comment, size: 16, color: Colors.grey.shade700,),
-                                  const SizedBox(width: 4),
-                                  Text(FormatUtils.formatNumber(podcast.totalComments)),
-                                ],
-                              ),
-                              const SizedBox(height: 4),
-                              Row(
-                                children: [
-                                  Icon(Icons.calendar_today, size: 16, color: Colors.grey.shade700,),
-                                  const SizedBox(width: 4),
-                                  Text(FormatUtils.formatTimeAgo(podcast.createdDay)),
-                                ],
-                              ),
-                            ],
+                      );
+                    },
+                    child: Container(
+                      color: Colors.white,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Image.network(
+                            podcast.thumbnailUrl,
+                            width: 150,
+                            height: 100,
+                            fit: BoxFit.cover,
                           ),
-                        ),
-                        IconButton(
-                          icon: const Icon(Icons.more_vert),
-                          onPressed: () {},
-                          padding: EdgeInsets.zero,
-                          constraints: const BoxConstraints(),
-                        )
-                      ],
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  podcast.title,
+                                  style: const TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                const SizedBox(height: 4),
+                                Row(
+                                  children: [
+                                    Icon(Icons.visibility, size: 16, color: Colors.grey.shade700,),
+                                    const SizedBox(width: 4),
+                                    Text(FormatUtils.formatNumber(podcast.views)),
+                                    const SizedBox(width: 12),
+                                    Icon(Icons.comment, size: 16, color: Colors.grey.shade700,),
+                                    const SizedBox(width: 4),
+                                    Text(FormatUtils.formatNumber(podcast.totalComments)),
+                                  ],
+                                ),
+                                const SizedBox(height: 4),
+                                Row(
+                                  children: [
+                                    Icon(Icons.calendar_today, size: 16, color: Colors.grey.shade700,),
+                                    const SizedBox(width: 4),
+                                    Text(FormatUtils.formatTimeAgo(podcast.createdDay)),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                          IconButton(
+                            icon: const Icon(Icons.more_vert),
+                            onPressed: () {},
+                            padding: EdgeInsets.zero,
+                            constraints: const BoxConstraints(),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 );
