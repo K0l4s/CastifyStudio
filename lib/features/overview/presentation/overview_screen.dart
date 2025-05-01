@@ -22,7 +22,7 @@ class _OverviewScreenState extends State<OverviewScreen> {
   Statistics? _statistics;
   bool _isLoading = true;
   String? _error;
-  DateRangeType _selectedRange = DateRangeType.thisMonth;
+  DateRangeType _selectedRange = DateRangeType.allTime;
   UserModel? _user;
 
   @override
