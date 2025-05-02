@@ -1,5 +1,6 @@
 import 'package:castify_studio/features/chat/presentation/chat_screen.dart';
 import 'package:castify_studio/features/content/presentation/screens/content_screen.dart';
+import 'package:castify_studio/features/manage_comment/presentation/screens/manage_comment_screen.dart';
 import 'package:castify_studio/features/notification/presentation/notification_screen.dart';
 import 'package:castify_studio/features/overview/presentation/overview_screen.dart';
 import 'package:castify_studio/features/upload/presentation/upload_screen.dart';
@@ -18,8 +19,8 @@ class _MainScreenState extends State<MainScreen> {
   final List<Widget> _screens = const [
     OverviewScreen(),
     ContentScreen(),
-    UploadScreen(),
-    ChatScreen(),
+    // UploadScreen(),
+    ManageCommentScreen(),
     NotificationScreen(),
   ];
 
@@ -38,13 +39,13 @@ class _MainScreenState extends State<MainScreen> {
       icon: Icon(Icons.video_library),
       label: 'Content',
     ),
+    // BottomNavigationBarItem(
+    //   icon: Icon(Icons.add_circle_outline),
+    //   label: 'Create',
+    // ),
     BottomNavigationBarItem(
-      icon: Icon(Icons.add_circle_outline),
-      label: 'Create',
-    ),
-    BottomNavigationBarItem(
-      icon: Icon(Icons.chat_bubble_outline),
-      label: 'Chat',
+      icon: Icon(Icons.comment_outlined),
+      label: 'Community',
     ),
     BottomNavigationBarItem(
       icon: Icon(Icons.notifications),
