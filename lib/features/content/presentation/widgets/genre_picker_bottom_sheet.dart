@@ -98,8 +98,7 @@ class _GenrePickerBottomSheetState extends State<GenrePickerBottomSheet> {
             children: [
               const Text(
                 "Select genres",
-                style:
-                TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 12),
               TextField(
@@ -125,8 +124,7 @@ class _GenrePickerBottomSheetState extends State<GenrePickerBottomSheet> {
                       value: selectedIds.contains(genre.id),
                       onChanged: (_) => _toggleGenre(genre.id),
                       activeColor: Colors.blue.shade800,
-                      controlAffinity:
-                      ListTileControlAffinity.leading,
+                      controlAffinity: ListTileControlAffinity.leading,
                     );
                   },
                 ),
@@ -135,13 +133,15 @@ class _GenrePickerBottomSheetState extends State<GenrePickerBottomSheet> {
                 width: double.infinity,
                 child: OutlinedButton(
                   style: OutlinedButton.styleFrom(
-                    foregroundColor: Colors.blue.shade800,
-                    side: BorderSide(color: Colors.blue.shade800),
+                    foregroundColor: selectedIds.isEmpty ? Colors.grey : Colors.blue.shade800,
+                    side: BorderSide(color: selectedIds.isEmpty ? Colors.grey : Colors.blue.shade800),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  onPressed: () {
+                  onPressed: selectedIds.isEmpty
+                      ? null
+                      : () {
                     final selectedGenres = _allGenres
                         .where((g) => selectedIds.contains(g.id))
                         .toList();
