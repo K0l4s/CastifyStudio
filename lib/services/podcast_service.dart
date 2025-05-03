@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:castify_studio/features/content/data/models/podcast_model.dart';
 import 'package:castify_studio/services/api_service.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:logger/logger.dart';
 
 class PodcastService {
@@ -38,7 +37,6 @@ class PodcastService {
       '/podcast/contents',
       queryParams: queryParams,
     );
-
     return PodcastResponse.fromJson(response);
   }
 

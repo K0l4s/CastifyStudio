@@ -24,9 +24,8 @@ class _MainScreenState extends State<MainScreen> {
   final List<Widget> _screens = const [
     OverviewScreen(),
     ContentScreen(),
-    CreatorFollowerScreen(),
-    // UploadScreen(),
     ManageCommentScreen(),
+    CreatorFollowerScreen(),
   ];
 
   void _onItemTapped(int index) {

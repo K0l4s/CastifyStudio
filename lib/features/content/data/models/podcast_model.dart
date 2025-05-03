@@ -16,9 +16,9 @@ class Genre {
 
 class User {
   final String id;
-  final String fullname;
-  final String username;
-  final String avatarUrl;
+  final String? fullname;
+  final String? username;
+  final String? avatarUrl;
 
   User({
     required this.id,
@@ -30,9 +30,9 @@ class User {
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
       id: json['id'],
-      fullname: json['fullname'],
-      username: json['username'],
-      avatarUrl: json['avatarUrl'],
+      fullname: json['fullname']?.toString(),
+      username: json['username']?.toString(),
+      avatarUrl: json['avatarUrl']?.toString(),
     );
   }
 }
