@@ -4,7 +4,9 @@ import 'package:castify_studio/features/auth/presentation/provider/auth_provider
 import 'package:castify_studio/features/auth/presentation/provider/user_provider.dart';
 import 'package:castify_studio/features/auth/presentation/screens/verify_screen.dart';
 import 'package:castify_studio/features/content/presentation/provider/podcast_provider.dart';
+import 'package:castify_studio/features/manage_comment/provider/comment_provider.dart';
 import 'package:castify_studio/features/splash/presentation/splash_screen.dart';
+import 'package:castify_studio/features/upload/provider/upload_podcast_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:logger/logger.dart';
@@ -19,7 +21,9 @@ Future<void> main() async {
       providers: [
         ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => UserProvider()),
-        ChangeNotifierProvider(create: (_) => PodcastProvider())
+        ChangeNotifierProvider(create: (_) => PodcastProvider()),
+        ChangeNotifierProvider(create: (_) => CommentProvider()),
+        ChangeNotifierProvider(create: (_) => UploadPodcastProvider()),
       ],
       child: const MyApp(),
     ),

@@ -48,7 +48,7 @@ class Podcast {
   final int duration;
   final int totalLikes;
   final int totalComments;
-  final String username;
+  final String? username;
   final String createdDay;
   final String lastEdited;
   final User user;
@@ -66,7 +66,7 @@ class Podcast {
     required this.duration,
     required this.totalLikes,
     required this.totalComments,
-    required this.username,
+    this.username,
     required this.createdDay,
     required this.lastEdited,
     required this.user,
@@ -96,6 +96,45 @@ class Podcast {
       active: json['active'],
     );
   }
+
+  Podcast copyWith({
+    String? id,
+    String? title,
+    String? content,
+    String? thumbnailUrl,
+    String? videoUrl,
+    List<Genre>? genres,
+    int? views,
+    int? duration,
+    int? totalLikes,
+    int? totalComments,
+    String? username,
+    String? createdDay,
+    String? lastEdited,
+    User? user,
+    bool? liked,
+    bool? active,
+  }) {
+    return Podcast(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      content: content ?? this.content,
+      thumbnailUrl: thumbnailUrl ?? this.thumbnailUrl,
+      videoUrl: videoUrl ?? this.videoUrl,
+      genres: genres ?? this.genres,
+      views: views ?? this.views,
+      duration: duration ?? this.duration,
+      totalLikes: totalLikes ?? this.totalLikes,
+      totalComments: totalComments ?? this.totalComments,
+      username: username ?? this.username,
+      createdDay: createdDay ?? this.createdDay,
+      lastEdited: lastEdited ?? this.lastEdited,
+      user: user ?? this.user,
+      liked: liked ?? this.liked,
+      active: active ?? this.active,
+    );
+  }
+
 }
 
 class PodcastResponse {

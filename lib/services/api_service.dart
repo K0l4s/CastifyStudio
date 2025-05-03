@@ -124,6 +124,28 @@ class ApiService {
     }
   }
 
+  Future<dynamic> deleteWithBody(String path, dynamic body) async {
+    final token = await _getToken();
+    final dio = Dio(BaseOptions(
+      baseUrl: _baseUrl,
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json',
+      },
+    ));
+
+    try {
+      final response = await dio.delete(path, data: body);
+      return response.data;
+    } on DioException catch (e) {
+      logger.e('Error: ${e.message}');
+      throw ApiException(
+        statusCode: e.response?.statusCode ?? 500,
+        message: e.response?.data['message'] ?? 'Failed',
+      );
+    }
+  }
+
   dynamic _processResponse(http.Response response) {
     final statusCode = response.statusCode;
     final body = response.body.isNotEmpty ? jsonDecode(response.body) : null;

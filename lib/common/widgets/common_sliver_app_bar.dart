@@ -1,5 +1,6 @@
 import 'package:castify_studio/features/auth/presentation/provider/user_provider.dart';
 import 'package:castify_studio/features/profile/presentation/profile_screen.dart';
+import 'package:castify_studio/features/upload/presentation/upload_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -37,6 +38,19 @@ class CommonSliverAppBar extends StatelessWidget {
       ),
       actions: [
         ...?actions,
+        IconButton(
+          icon: Icon(
+            Icons.add,
+            color: Colors.blue.shade800,
+          ),
+          tooltip: 'Upload',
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const UploadPodcastScreen()),
+            );
+          },
+        ),
         const SizedBox(width: 8),
         Consumer<UserProvider>(
           builder: (context, userProvider, _) {

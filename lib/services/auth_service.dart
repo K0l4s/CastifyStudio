@@ -81,4 +81,30 @@ class AuthService {
 
     return false;
   }
+
+  // Send reset password request
+  Future<bool> sendResetRequest(String email) async {
+    final res = await _api.post('/auth/reset/send-request', {
+      'email': email,
+    });
+
+    if (res != null && res['status'] == 'success') {
+      return true;
+    } else {
+      throw Exception('Failed to send reset request');
+    }
+  }
+
+  // Reset password
+  Future<bool> resetPassword(String newPassword) async {
+    final res = await _api.post('/auth/reset/change', {
+      'newPassword': newPassword,
+    });
+
+    if (res != null && res['status'] == 'success') {
+      return true;
+    } else {
+      throw Exception('Failed to reset password');
+    }
+  }
 }
