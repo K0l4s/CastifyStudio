@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:castify_studio/utils/shared_prefs.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
@@ -58,6 +59,19 @@ class ApiService {
       body: jsonEncode(body),
     );
     return _processResponse(response);
+  }
+  Future<String> putText(String path, {Map<String, String>? headers}) async {
+    final uri = Uri.parse('$_baseUrl$path');
+    final response = await http.put(
+      uri,
+      headers: await _headers(extra: headers),
+    );
+
+    if (response.statusCode >= 200 && response.statusCode < 300) {
+      return response.body; // plain text
+    } else {
+      throw HttpException('Failed with status code ${response.statusCode}: ${response.body}');
+    }
   }
 
   Future<dynamic> delete(String path, {Map<String, String>? headers}) async {
