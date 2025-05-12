@@ -89,4 +89,44 @@ class UserModel extends User {
       'follow': follow,
     };
   }
+
+  UserModel copyWith({
+    String? id,
+    String? firstName,
+    String? middleName,
+    String? lastName,
+    String? username,
+    String? avatarUrl,
+    String? coverUrl,
+    DateTime? birthday,
+    String? address,
+    String? location,
+    String? locality,
+    String? phone,
+    String? email,
+    int? totalFollower,
+    int? totalFollowing,
+    int? totalPost,
+    bool? follow,
+  }) {
+    return UserModel(
+      id: id ?? this.id,
+      firstName: firstName ?? this.firstName,
+      middleName: middleName ?? this.middleName,
+      lastName: lastName ?? this.lastName,
+      username: username ?? this.username,
+      avatarUrl: avatarUrl ?? this.avatarUrl,
+      coverUrl: coverUrl ?? this.coverUrl,
+      birthday: birthday ?? this.birthday,
+      address: address ?? this.address,
+      location: location ?? this.location,
+      locality: locality ?? this.locality,
+      phone: phone ?? this.phone,
+      email: email ?? this.email,
+      totalFollower: totalFollower ?? this.totalFollower,
+      totalFollowing: totalFollowing ?? this.totalFollowing,
+      totalPost: totalPost ?? this.totalPost,
+      follow: follow ?? this.follow,
+    );
+  }
 }

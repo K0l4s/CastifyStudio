@@ -32,4 +32,25 @@ class UserService {
       return;
     }
   }
+
+  Future<UserModel?> updateUserInfo({
+      required String firstName,
+      required String middleName,
+      required String lastName,
+    }) async {
+      try {
+        final body = {
+          'firstName': firstName,
+          'middleName': middleName,
+          'lastName': lastName,
+        };
+
+        final res = await _api.put('/user', body);
+        return UserModel.fromJson(res);
+      } catch (e) {
+        logger.e('Error updating profile: $e');
+        return null;
+      }
+    }
+
 }
