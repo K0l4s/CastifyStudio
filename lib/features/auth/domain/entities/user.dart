@@ -1,6 +1,8 @@
 class User {
   final String? id;
-  final String? fullname;
+  final String? firstName;
+  final String? middleName;
+  final String? lastName;
   final String? username;
   final String? avatarUrl;
   final String? coverUrl;
@@ -17,7 +19,9 @@ class User {
 
   User({
     this.id,
-    this.fullname,
+    this.firstName,
+    this.middleName,
+    this.lastName,
     this.username,
     this.avatarUrl,
     this.coverUrl,

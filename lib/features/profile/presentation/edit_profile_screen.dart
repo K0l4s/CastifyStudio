@@ -86,9 +86,21 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               ],
             ),
             const SizedBox(height: 16),
-            Text(
-              user.fullname ?? '',
-              style: const TextStyle(fontSize: 20),
+            Column(
+              children: [
+                Text(
+                  user.firstName ?? '',
+                  style: const TextStyle(fontSize: 20),
+                ),
+                Text(
+                  user.middleName ?? '',
+                  style: const TextStyle(fontSize: 20),
+                ),
+                Text(
+                  user.lastName ?? '',
+                  style: const TextStyle(fontSize: 20),
+                ),
+              ],
             ),
             Text(
               '@${user.username}',

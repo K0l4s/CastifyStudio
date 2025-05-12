@@ -43,14 +43,34 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 Center(
-                  child: Text(
-                    user.fullname ?? 'No full name available',
-                    style: const TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  child: Column(
+                    children: [
+                      Text(
+                        user.firstName ?? '',
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      Text(
+                        user.middleName ?? '',
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      Text(
+                        user.lastName ?? '',
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
+
+                const SizedBox(height: 8),
                 Center(
                   child: Text(
                     '@${user.username}',

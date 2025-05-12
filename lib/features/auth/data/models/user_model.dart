@@ -3,7 +3,9 @@ import 'package:castify_studio/features/auth/domain/entities/user.dart';
 class UserModel extends User {
   UserModel({
     super.id,
-    super.fullname,
+    super.firstName,
+    super.middleName,
+    super.lastName,
     super.username,
     super.avatarUrl,
     super.coverUrl,
@@ -37,7 +39,9 @@ class UserModel extends User {
 
     return UserModel(
       id: json['id'],
-      fullname: json['fullname'],
+      firstName: json['firstName'],
+      middleName: json['middleName'],
+      lastName: json['lastName'],
       username: json['username'],
       avatarUrl: json['avatarUrl'],
       coverUrl: json['coverUrl'],
@@ -57,7 +61,9 @@ class UserModel extends User {
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'fullname': fullname,
+      'firstName': firstName,
+      'middleName': middleName,
+      'lastName': lastName,
       'username': username,
       'avatarUrl': avatarUrl,
       'coverUrl': coverUrl,
