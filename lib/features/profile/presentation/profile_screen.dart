@@ -1,7 +1,7 @@
 import 'package:castify_studio/common/dialogs/confirm_dialog.dart';
 import 'package:castify_studio/features/auth/presentation/provider/user_provider.dart';
 import 'package:castify_studio/features/auth/presentation/screens/login_screen.dart';
-import 'package:castify_studio/features/auth/presentation/screens/privacy_screen.dart';
+import 'package:castify_studio/features/auth/presentation/screens/privacy_and_term_screen.dart';
 import 'package:castify_studio/features/profile/presentation/edit_profile_screen.dart';
 import 'package:castify_studio/services/toast_service.dart';
 import 'package:flutter/material.dart';
@@ -99,11 +99,11 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 ListTile(
                   leading: const Icon(Icons.lock),
-                  title: const Text('Privacy'),
+                  title: const Text('Privacy & Terms'),
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (_) => const PrivacyScreen()),
+                      MaterialPageRoute(builder: (_) => const PrivacyAndTermsScreen()),
                     );
                   },
                 ),
