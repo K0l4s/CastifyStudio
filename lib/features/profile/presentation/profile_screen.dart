@@ -46,21 +46,7 @@ class ProfileScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       Text(
-                        user.firstName ?? '',
-                        style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      Text(
-                        user.middleName ?? '',
-                        style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      Text(
-                        user.lastName ?? '',
+                        '${user.lastName ?? ''} ${user.middleName ?? ''} ${user.firstName ?? ''}'.trim(),
                         style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w500,

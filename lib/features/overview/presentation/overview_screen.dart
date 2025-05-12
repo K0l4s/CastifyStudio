@@ -113,7 +113,7 @@ class _OverviewScreenState extends State<OverviewScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                '${_user!.firstName ?? ''} ${_user!.middleName ?? ''} ${_user!.lastName ?? ''}'.trim(),
+                '${_user!.lastName ?? ''} ${_user!.middleName ?? ''} ${_user!.firstName ?? ''}'.trim(),
                 style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 4),
