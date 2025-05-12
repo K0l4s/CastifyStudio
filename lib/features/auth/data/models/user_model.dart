@@ -3,7 +3,9 @@ import 'package:castify_studio/features/auth/domain/entities/user.dart';
 class UserModel extends User {
   UserModel({
     super.id,
-    super.fullname,
+    super.firstName,
+    super.middleName,
+    super.lastName,
     super.username,
     super.avatarUrl,
     super.coverUrl,
@@ -37,7 +39,9 @@ class UserModel extends User {
 
     return UserModel(
       id: json['id'],
-      fullname: json['fullname'],
+      firstName: json['firstName'],
+      middleName: json['middleName'],
+      lastName: json['lastName'],
       username: json['username'],
       avatarUrl: json['avatarUrl'],
       coverUrl: json['coverUrl'],
@@ -57,7 +61,9 @@ class UserModel extends User {
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'fullname': fullname,
+      'firstName': firstName,
+      'middleName': middleName,
+      'lastName': lastName,
       'username': username,
       'avatarUrl': avatarUrl,
       'coverUrl': coverUrl,
@@ -82,5 +88,45 @@ class UserModel extends User {
       'totalPost': totalPost,
       'follow': follow,
     };
+  }
+
+  UserModel copyWith({
+    String? id,
+    String? firstName,
+    String? middleName,
+    String? lastName,
+    String? username,
+    String? avatarUrl,
+    String? coverUrl,
+    DateTime? birthday,
+    String? address,
+    String? location,
+    String? locality,
+    String? phone,
+    String? email,
+    int? totalFollower,
+    int? totalFollowing,
+    int? totalPost,
+    bool? follow,
+  }) {
+    return UserModel(
+      id: id ?? this.id,
+      firstName: firstName ?? this.firstName,
+      middleName: middleName ?? this.middleName,
+      lastName: lastName ?? this.lastName,
+      username: username ?? this.username,
+      avatarUrl: avatarUrl ?? this.avatarUrl,
+      coverUrl: coverUrl ?? this.coverUrl,
+      birthday: birthday ?? this.birthday,
+      address: address ?? this.address,
+      location: location ?? this.location,
+      locality: locality ?? this.locality,
+      phone: phone ?? this.phone,
+      email: email ?? this.email,
+      totalFollower: totalFollower ?? this.totalFollower,
+      totalFollowing: totalFollowing ?? this.totalFollowing,
+      totalPost: totalPost ?? this.totalPost,
+      follow: follow ?? this.follow,
+    );
   }
 }

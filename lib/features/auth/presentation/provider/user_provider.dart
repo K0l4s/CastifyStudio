@@ -9,7 +9,9 @@ class UserProvider extends ChangeNotifier {
 
   String? get avatarUrl => _user?.avatarUrl;
   String? get username => _user?.username;
-  String? get fullname => _user?.fullname;
+  String? get firstName => _user?.firstName;
+  String? get middleName => _user?.middleName;
+  String? get lastName => _user?.lastName;
   String? get email => _user?.email;
 
   // Load user từ SharedPreferences

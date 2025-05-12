@@ -4,7 +4,7 @@ import 'package:castify_studio/features/auth/presentation/components/my_text_fie
 import 'package:castify_studio/features/auth/presentation/provider/auth_provider.dart';
 import 'package:castify_studio/features/auth/presentation/provider/user_provider.dart';
 import 'package:castify_studio/features/auth/presentation/screens/forgot_screen.dart';
-import 'package:castify_studio/features/auth/presentation/screens/privacy_screen.dart';
+import 'package:castify_studio/features/auth/presentation/screens/privacy_and_term_screen.dart';
 import 'package:castify_studio/features/auth/presentation/screens/register_screen.dart';
 import 'package:castify_studio/features/main/presentation/main_screen.dart';
 import 'package:castify_studio/services/auth_service.dart';
@@ -82,7 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (_) => const PrivacyScreen()),
+                    MaterialPageRoute(builder: (_) => const PrivacyAndTermsScreen()),
                   );
                 },
               ),

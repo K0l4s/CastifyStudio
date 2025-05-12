@@ -11,7 +11,7 @@ class UserService {
 
   Future<UserModel?> getSelfUserInfo() async {
     try {
-      final res = await _api.get('/user');
+      final res = await _api.get('/user/auth');
       return UserModel.fromJson(res);
     } catch (e, stack) {
       logger.e('Error loading user info', error: e, stackTrace: stack);
@@ -32,4 +32,25 @@ class UserService {
       return;
     }
   }
+
+  Future<UserModel?> updateUserInfo({
+      required String firstName,
+      required String middleName,
+      required String lastName,
+    }) async {
+      try {
+        final body = {
+          'firstName': firstName,
+          'middleName': middleName,
+          'lastName': lastName,
+        };
+
+        final res = await _api.put('/user', body);
+        return UserModel.fromJson(res);
+      } catch (e) {
+        logger.e('Error updating profile: $e');
+        return null;
+      }
+    }
+
 }
